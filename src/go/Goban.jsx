@@ -7,7 +7,7 @@ import { useGLTF } from "@react-three/drei";
 
 export function Goban(props) {
   const { nodes, materials } = useGLTF("/go/goBan.glb");
-  console.log(nodes)
+
   return (
     <group {...props} dispose={null}>
       <mesh
