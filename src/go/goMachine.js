@@ -29,6 +29,7 @@ const turnlogic = {
   initial: 'turn',
   states: {
     turn: {
+      entry: [ () => console.log('enter turn') ],
       on: {
         SUBMIT: {
           target: 'updateserver'
@@ -36,6 +37,7 @@ const turnlogic = {
       }
     },
     updateserver: {
+      entry: [ () => console.log('enter updateserver') ],
       on: {
         UPDATE: {
           target: 'turn'
@@ -55,6 +57,7 @@ const logic = {
   },
   states: {
     gameform: {
+      entry: [ () => console.log('enter Gameform') ],
       on: {
         START: {
           target: 'gameplay'
@@ -62,6 +65,7 @@ const logic = {
       }
     },
     gameplay: {
+      entry: [ () => console.log('enter Gameplay') ],
       on: {
         NAV: {
           target: 'playback'
@@ -73,13 +77,16 @@ const logic = {
       ...turnlogic
     },
     playback: {
+      entry: [ () => console.log('enter playback') ],
       on: {
         PLAY: {
           target: 'gameplay'
         }
       }
     },
-    endgame: {},
+    endgame: {
+      entry: [ () => console.log('enter endgame') ],
+    },
   }
 };
 

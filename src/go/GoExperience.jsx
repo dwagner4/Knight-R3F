@@ -24,8 +24,6 @@ export default function Experience()
         <Arena />
         <Goban />
         <GoBowl position={[ 0,0,0.3 ]}/>
-        <WhiteStone position={[ 0.3,0,0.3 ]}/>
-        <BlackStone position={[ -0.3,0,0.3 ]} onClick={(e) => send('TOGGLE')} />
         <Spaces board={board}/>
     </>
 }
