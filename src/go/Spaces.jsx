@@ -1,12 +1,12 @@
 import { BlackStone } from './BlackStone.jsx'
 import { WhiteStone } from './WhiteStone.jsx'
 
-import { goMachine } from './goMachine.js'
-import { useMachine } from '@xstate/react';
+import { goMachineService } from './goMachine.js'
+// import { useMachine } from '@xstate/react';
 
-import { GoContext } from './GoExperience.jsx'
-import { useContext } from 'react'
-import { useActor } from '@xstate/react'
+// import { GoContext } from './GoExperience.jsx'
+// import { useContext } from 'react'
+// import { useActor } from '@xstate/react'
 
 function Space( props )
 {
@@ -27,9 +27,13 @@ export function Spaces()
   // console.log(xstate)
 
   // const [ xstate, send ] = useMachine(localGoService)
-  const [ xstate, send ] = useMachine(goMachine)
+  // const [ xstate, send ] = useMachine(goMachine)
+  let board = []
 
-  const board = xstate.context.board
+  goMachineService.subscribe( state => {
+    board = state.context.board
+  } )
+
   board[200] = 'w'
   board[202] = 'b'
 
@@ -37,8 +41,7 @@ export function Spaces()
   // const clickFunc = () => send({ type: 'SUBMIT' })
   const clickFunc = (e) => {
     console.log('fuck you', e.eventObject.userData.index)
-    console.log( xstate.value )
-    send('NAV')
+    goMachineService.send('NAV')
 
   }
 

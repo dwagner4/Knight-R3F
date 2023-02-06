@@ -91,13 +91,13 @@ const functions = {
 
 const goMachine = createMachine( logic, functions )
 
-// const goMachineService = interpret(goMachine)
-// goMachineService.onTransition(state => console.log(state.value))
+const goMachineService = interpret(goMachine)
+goMachineService.onTransition(state => console.log(state.value))
 
 
-// goMachineService.start()
+goMachineService.start()
 // goMachineService.send('START')
 
 
-// export { goMachine, goMachineService }
-export { goMachine }
+export { goMachine, goMachineService }
+// export { goMachine }
