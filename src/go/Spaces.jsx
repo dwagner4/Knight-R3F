@@ -4,28 +4,41 @@ import { WhiteStone } from './WhiteStone.jsx'
 import { goMachine } from './goMachine.js'
 import { useMachine } from '@xstate/react';
 
+import { GoContext } from './GoExperience.jsx'
+import { useContext } from 'react'
+import { useActor } from '@xstate/react'
+
 function Space( props )
 {
-  const [state, send, service] = useMachine(goMachine);
   return <mesh { ...props }
       rotation-x={ - Math.PI * 0.5 } 
       scale={ 0.015 }
-      onClick={() => send({ type: 'SUBMIT' })}
   >
     <planeGeometry />
     <meshBasicMaterial color={ 'red' } transparent={ true } opacity={ 0.2 } />
   </mesh>
 }
 
-export function Spaces({ board })
+export function Spaces()
 {  
+  const goService = useContext( GoContext )
+  const [xstate ] = useActor(goService.goService);
+
+  // const [ xstate, send ] = useMachine(goMachine)
+
+  const board = xstate.context.board
   board[200] = 'w'
   board[202] = 'b'
-  const [state, send, service] = useMachine(goMachine);
-  console.log(send)
-  send('SUBMIT')
+
+  
   // const clickFunc = () => send({ type: 'SUBMIT' })
-  const clickFunc = () => console.log('Fuck You')
+  const clickFunc = (e) => {
+    console.log('fuck you', e.eventObject.userData.index)
+    console.log( xstate.value )
+    goService.goService.send('NAV')
+  }
+
+
   return <group>
     {board.map((type, index) => {
         const xSpaceSize = 0.17 / 9
@@ -34,8 +47,7 @@ export function Spaces({ board })
         if( type === 'e' ) { return <Space key={index} 
             userData={{index: index, type: 'e'}} 
             position={[ xpos, 0.19, ypos ]} 
-            onClick={() => send({ type: 'SUBMIT' })}
-            // onClick={(e) => console.log('fuck you', e.eventObject.userData.index)}
+            onClick={ clickFunc }
         /> }
         if( type === 'b' ) { return <BlackStone key={index} 
           userData={{index: index, type: 'b'}} 

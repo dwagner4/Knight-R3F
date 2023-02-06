@@ -2,7 +2,7 @@ import './style.css'
 import ReactDOM from 'react-dom/client'
 import { Canvas } from '@react-three/fiber'
 import GoExperience from './go/GoExperience.jsx'
-import Interface from './interface.jsx'
+
 
 const root = ReactDOM.createRoot(document.querySelector('#root'))
 
@@ -18,8 +18,6 @@ root.render(
             } }
         >
             <GoExperience />
-            
         </Canvas>
-        <Interface />
     </>
 )
