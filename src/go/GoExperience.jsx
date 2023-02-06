@@ -15,17 +15,17 @@ import React, { createContext } from 'react';
 import { useInterpret } from '@xstate/react';
 
 
-export const GoContext = createContext();
+export const GoContext = createContext({});
 
 export default function Experience()
 {
     // const [state, send, service] = useMachine(goMachine);
     // const board = state.context.board
 
-    const goService = useInterpret(goMachine)
+    // const goService = useInterpret(goMachine)
 
-    return (
-        <GoContext.Provider value={{ goService }} >
+    return (<>
+        // <GoContext.Provider value={{ goMachine }} >
             <OrbitControls makeDefault />
             <Lights />
             <Arena />
@@ -35,6 +35,6 @@ export default function Experience()
             <Html>
                 <Interface />
             </Html>
-        </GoContext.Provider>
+        // </GoContext.Provider></>
     )
 }

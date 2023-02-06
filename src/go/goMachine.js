@@ -1,4 +1,4 @@
-import { createMachine } from 'xstate';
+import { createMachine, interpret, assign } from 'xstate';
 
 const initalBoard = [ 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 
                       'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 
@@ -73,6 +73,7 @@ const logic = {
       ...turnlogic
     },
     playback: {
+      entry: [ () => {console.log('i am in playback')} ],
       on: {
         PLAY: {
           target: 'gameplay'
@@ -90,5 +91,13 @@ const functions = {
 
 const goMachine = createMachine( logic, functions )
 
+// const goMachineService = interpret(goMachine)
+// goMachineService.onTransition(state => console.log(state.value))
 
+
+// goMachineService.start()
+// goMachineService.send('START')
+
+
+// export { goMachine, goMachineService }
 export { goMachine }

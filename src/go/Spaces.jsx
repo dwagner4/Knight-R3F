@@ -21,10 +21,13 @@ function Space( props )
 
 export function Spaces()
 {  
-  const goService = useContext( GoContext )
-  const [xstate ] = useActor(goService.goService);
+  // const localGoService = useContext( GoContext )
+  // const [ xstate ] = useActor(localGoService.goMachineService);
 
-  // const [ xstate, send ] = useMachine(goMachine)
+  // console.log(xstate)
+
+  // const [ xstate, send ] = useMachine(localGoService)
+  const [ xstate, send ] = useMachine(goMachine)
 
   const board = xstate.context.board
   board[200] = 'w'
@@ -35,7 +38,8 @@ export function Spaces()
   const clickFunc = (e) => {
     console.log('fuck you', e.eventObject.userData.index)
     console.log( xstate.value )
-    goService.goService.send('NAV')
+    send('NAV')
+
   }
 
 
