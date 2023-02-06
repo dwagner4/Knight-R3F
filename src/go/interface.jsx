@@ -1,18 +1,7 @@
-import { goMachineService } from './go/goMachine.js'
-// import { useMachine } from '@xstate/react';
-
-// import { GoContext } from './go/GoExperience.jsx'
-// import { useContext } from 'react'
-// import { useActor } from '@xstate/react'
+import { goMachineService } from './goMachine.js'
 
 export default function Interface()
 {
-
-  // const goService = useContext( GoContext )
-  // const [xstate, send ] = useActor(goService.goService);
-
-  // const [ xstate, send ] = useMachine(goMachine)
-
   let stateStr = 'yoho'
   goMachineService.subscribe( state =>  stateStr = state.toStrings())
 

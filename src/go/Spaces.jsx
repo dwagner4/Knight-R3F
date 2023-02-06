@@ -2,11 +2,6 @@ import { BlackStone } from './BlackStone.jsx'
 import { WhiteStone } from './WhiteStone.jsx'
 
 import { goMachineService } from './goMachine.js'
-// import { useMachine } from '@xstate/react';
-
-// import { GoContext } from './GoExperience.jsx'
-// import { useContext } from 'react'
-// import { useActor } from '@xstate/react'
 
 function Space( props )
 {
@@ -21,13 +16,6 @@ function Space( props )
 
 export function Spaces()
 {  
-  // const localGoService = useContext( GoContext )
-  // const [ xstate ] = useActor(localGoService.goMachineService);
-
-  // console.log(xstate)
-
-  // const [ xstate, send ] = useMachine(localGoService)
-  // const [ xstate, send ] = useMachine(goMachine)
   let board = []
 
   goMachineService.subscribe( state => {
@@ -37,14 +25,11 @@ export function Spaces()
   board[200] = 'w'
   board[202] = 'b'
 
-  
-  // const clickFunc = () => send({ type: 'SUBMIT' })
-  const clickFunc = (e) => {
-    console.log('fuck you', e.eventObject.userData.index)
-    goMachineService.send('NAV')
-
-  }
-
+  const clickFunc = (e) => goMachineService.send({ 
+              type: 'SUBMIT', 
+              spaceIndex: e.eventObject.userData.index, 
+              spaceType:  e.eventObject.userData.type
+            } )
 
   return <group>
     {board.map((type, index) => {
@@ -59,12 +44,12 @@ export function Spaces()
         if( type === 'b' ) { return <BlackStone key={index} 
           userData={{index: index, type: 'b'}} 
           position={[ xpos, 0.19, ypos ]} 
-          onClick={ (e) => send( {type: 'SUBMIT', spaceIndex: e.eventObject.userData.index, spaceType:  e.eventObject.userData.type}  ) }
+          onClick={ clickFunc }
         /> }
         if( type === 'w' ) { return <WhiteStone key={index} 
           userData={{index: index, type: 'w'}} 
           position={[ xpos, 0.19, ypos ]} 
-          onClick={ (e) => send({ type: 'SUBMIT', spaceIndex: e.eventObject.userData.index, spaceType:  e.eventObject.userData.type} ) }
+          onClick={ clickFunc }
         /> }
       }
     )}

@@ -3,29 +3,18 @@ import Lights from '../Lights.jsx'
 import Arena from '../Arena.jsx'
 import { Goban } from './Goban.jsx'
 import { GoBowl } from './GoBowl.jsx'
-// import { WhiteStone } from './WhiteStone.jsx'
-// import { BlackStone } from './BlackStone.jsx'
 import { Spaces } from './Spaces.jsx'
-import  Interface  from '../interface.jsx'
+import  Interface  from './interface.jsx'
 
-// import { createContext } from 'react';
-// import { goMachine } from './goMachine.js'
-// import { useMachine } from '@xstate/react';
-// import React, { createContext } from 'react';
-// import { useInterpret } from '@xstate/react';
-
-
-// export const GoContext = createContext({});
+import { goMachineService } from './goMachine.js'
 
 export default function Experience()
 {
-    // const [state, send, service] = useMachine(goMachine);
-    // const board = state.context.board
 
-    // const goService = useInterpret(goMachine)
+    goMachineService.start()
 
-    return (<>
-
+    return (
+        <>
             <OrbitControls makeDefault />
             <Lights />
             <Arena />

@@ -95,7 +95,7 @@ const goMachineService = interpret(goMachine)
 goMachineService.onTransition(state => console.log(state.value))
 
 
-goMachineService.start()
+// goMachineService.start()
 // goMachineService.send('START')
 
 
