@@ -31,7 +31,8 @@ const turnlogic = {
     turn: {
       on: {
         SUBMIT: {
-          target: 'updateserver'
+          target: 'updateserver',
+          actions: [ 'submitSpace', 'updateBoard' ]
         }
       }
     },
@@ -51,7 +52,8 @@ const logic = {
   initial: 'gameform',
   context: {
     board: initalBoard,
-    turn: 'b'
+    turn: 'b',
+    you: 'frances'
   },
   states: {
     gameform: {
@@ -73,7 +75,6 @@ const logic = {
       ...turnlogic
     },
     playback: {
-      entry: [ () => {console.log('i am in playback')} ],
       on: {
         PLAY: {
           target: 'gameplay'
@@ -86,13 +87,28 @@ const logic = {
 };
 
 const functions = {
-  actions: {}
+  actions: 
+  {
+    submitSpace: ( context, event ) => { 
+      console.log( 'fuck you', event ) 
+      console.log(context.board)
+    },
+    // updateBoard: assign( { you: 'dean' } )
+    // updateBoard: assign( () => {return { you: 'dean' } })
+    updateBoard: assign( (context, event) => {
+      console.log(context.board, event.spaceIndex)
+      const b = context.board
+      b[event.spaceIndex] = 'w'
+      console.log(b)
+      return { you: 'dean', board: b} 
+    })
+  }
 }
 
 const goMachine = createMachine( logic, functions )
 
 const goMachineService = interpret(goMachine)
-goMachineService.onTransition(state => console.log(state.value))
+goMachineService.onTransition(state => console.log(state.value, state.context ) )
 
 
 // goMachineService.start()
@@ -100,4 +116,4 @@ goMachineService.onTransition(state => console.log(state.value))
 
 
 export { goMachine, goMachineService }
-// export { goMachine }
+// export { goMachine } submitSpace submitSpace
