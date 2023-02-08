@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { BlackStone } from './BlackStone.jsx'
 import { WhiteStone } from './WhiteStone.jsx'
 
@@ -16,14 +17,15 @@ function Space( props )
 
 export function Spaces()
 {  
-  let board = []
+  console.log('instantiating spaces')
+  const [ board, setBoard ] = useState([])
 
   goMachineService.subscribe( state => {
-    board = state.context.board
+    const jojo = state.context.board 
+    // setBoard( jojo )
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx')
+    console.log(board)
   } )
-
-  board[200] = 'w'
-  board[202] = 'b'
 
   const clickFunc = (e) => goMachineService.send({ 
               type: 'SUBMIT', 

@@ -90,16 +90,13 @@ const functions = {
   actions: 
   {
     submitSpace: ( context, event ) => { 
-      console.log( 'fuck you', event ) 
-      console.log(context.board)
+      console.log( 'submit event', event ) 
     },
     // updateBoard: assign( { you: 'dean' } )
     // updateBoard: assign( () => {return { you: 'dean' } })
     updateBoard: assign( (context, event) => {
-      console.log(context.board, event.spaceIndex)
       const b = context.board
       b[event.spaceIndex] = 'w'
-      console.log(b)
       return { you: 'dean', board: b} 
     })
   }
