@@ -1,3 +1,5 @@
+import React, { createContext } from "react";
+
 import { OrbitControls, Html } from '@react-three/drei'
 import Lights from '../Lights.jsx'
 import Arena from '../Arena.jsx'
@@ -8,13 +10,18 @@ import  Interface  from './interface.jsx'
 
 import { goMachineService } from './goMachine.js'
 
-export default function Experience()
+export const GoContext = createContext(goMachineService)
+
+export function GoExperience()
 {
 
     goMachineService.start()
 
+    // const GoContext = createContext(goMachineService)
+    console.log(GoContext)
+
     return (
-        <>
+        <GoContext.Provider value={{goMachineService}}>
             <OrbitControls makeDefault />
             <Lights />
             <Arena />
@@ -24,6 +31,6 @@ export default function Experience()
             <Html>
                 <Interface />
             </Html>
-        </>
+        </GoContext.Provider>
     )
 }

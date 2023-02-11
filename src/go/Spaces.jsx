@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useActor } from "@xstate/react";
+
 import { BlackStone } from './BlackStone.jsx'
 import { WhiteStone } from './WhiteStone.jsx'
 
 import { goMachineService } from './goMachine.js'
+import { GoContext } from './GoExperience.jsx'
 
 function Space( props )
 {
@@ -18,23 +21,25 @@ function Space( props )
 export function Spaces()
 {  
   console.log('instantiating spaces')
-  const [ board, setBoard ] = useState([])
 
-  goMachineService.subscribe( state => {
-    const jojo = state.context.board 
-    // setBoard( jojo )
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx')
-    console.log(board)
-  } )
 
-  const clickFunc = (e) => goMachineService.send({ 
+  const goServices = useContext(GoContext)
+  console.log(goServices)
+
+  const [ state, send, localservice ] = useActor(goServices.goMachineService)
+  console.log(state)
+
+  goServices.goMachineService.subscribe(state => console.log(state))
+
+
+  const clickFunc = (e) => send({ 
               type: 'SUBMIT', 
               spaceIndex: e.eventObject.userData.index, 
               spaceType:  e.eventObject.userData.type
             } )
 
   return <group>
-    {board.map((type, index) => {
+    {state.context.board.map((type, index) => {
         const xSpaceSize = 0.17 / 9
         const xpos = xSpaceSize * ( index % 19 - 9 )
         const ypos = xSpaceSize * ( Math.floor( index / 19 ) - 9 ) 
