@@ -95,9 +95,10 @@ const functions = {
     // updateBoard: assign( { you: 'dean' } )
     // updateBoard: assign( () => {return { you: 'dean' } })
     updateBoard: assign( (context, event) => {
-      const b = context.board
-      b[event.spaceIndex] = 'w'
-      return { you: 'dean', board: b} 
+      const b = [...context.board]
+      b[event.spaceIndex] = context.turn
+      const nextTurn = context.turn === 'b' ? 'w' : 'b' ;
+      return { you: 'dean', board: b, turn: nextTurn} 
     })
   }
 }
