@@ -3,7 +3,7 @@ import { goMachineService } from './goMachine.js'
 export default function Interface()
 {
   let stateStr = 'yoho'
-  goMachineService.subscribe( state =>  stateStr = state.toStrings())
+  goMachineService.subscribe( state => stateStr = state.toStrings())
 
   return <div className="interface" >
     {/* <h1>{xstate.toStrings()}</h1> */}

@@ -1,11 +1,9 @@
 import { useState, useEffect, useContext } from 'react'
 import { useActor } from "@xstate/react";
+import { GoContext } from './GoExperience.jsx'
 
 import { BlackStone } from './BlackStone.jsx'
 import { WhiteStone } from './WhiteStone.jsx'
-
-import { goMachineService } from './goMachine.js'
-import { GoContext } from './GoExperience.jsx'
 
 function Space( props )
 {
@@ -29,7 +27,7 @@ export function Spaces()
   const [ state, send, localservice ] = useActor(goServices.goMachineService)
   console.log(state)
 
-  goServices.goMachineService.subscribe(state => console.log(state))
+  // goServices.goMachineService.subscribe(state => console.log(state))
 
 
   const clickFunc = (e) => send({ 

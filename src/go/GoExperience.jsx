@@ -28,7 +28,7 @@ export function GoExperience()
             <Goban />
             <GoBowl position={[ 0,0,0.3 ]}/>
             <Spaces />
-            <Html>
+            <Html position={[-0.5,0.3,0]}>
                 <Interface />
             </Html>
         </GoContext.Provider>
