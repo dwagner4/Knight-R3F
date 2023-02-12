@@ -37,6 +37,9 @@ const turnlogic = {
       }
     },
     updateserver: {
+      after: {
+        2000: { target: 'turn'}
+      },
       on: {
         UPDATE: {
           target: 'turn'
