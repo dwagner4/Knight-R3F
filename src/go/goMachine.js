@@ -38,7 +38,7 @@ const turnlogic = {
     },
     updateserver: {
       after: {
-        2000: { target: 'turn'}
+        500: { target: 'turn'}
       },
       on: {
         UPDATE: {
@@ -52,7 +52,7 @@ const turnlogic = {
 const logic = {
   predictableActionArguments: true,
   id: 'gogame',
-  initial: 'gameform',
+  initial: 'gameplay',
   context: {
     board: initalBoard,
     turn: 'b',
